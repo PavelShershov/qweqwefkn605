@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Простой Image Tracking AR</title>
+    <!-- A-Frame и AR.js NFT -->
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
+    <style>
+        body { margin: 0; overflow: hidden; }
+    </style>
+</head>
+<body>
+    <!-- AR-сцена -->
+    <a-scene
+        vr-mode-ui="enabled: false"
+        renderer="logarithmicDepthBuffer: true;"
+        embedded
+        arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;"
+    >
+        <!-- Маркер NFT (указываем путь без расширения) -->
+        <a-nft
+            type="nft"
+            url="./assets/markers/marker"   <!-- имя файла без .fset и др. -->
+            smooth="true"
+            smoothCount="10"
+            smoothTolerance=".01"
+            smoothThreshold="5"
+        >
+            <!-- Наша 3D-модель, привязанная к маркеру -->
+            <a-entity
+                gltf-model="./assets/model1.glb"
+                scale="0.5 0.5 0.5"          <!-- подберите масштаб под вашу модель -->
+                position="0 0 0"
+                rotation="0 0 0"
+                animation="property: rotation; to: 0 360 0; loop: true; dur: 10000; easing: linear;"
+            ></a-entity>
+        </a-nft>
+
+        <!-- Камера -->
+        <a-entity camera></a-entity>
+    </a-scene>
+</body>
+</html>
